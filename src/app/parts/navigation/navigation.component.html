@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand" [routerLink]="root">
+        <img src="/assets/bk.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        BOOKHIVE
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+            <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <div class="navbar-nav" *ngIf="!currentUser || currentUser.role == Role.Customer">
+
+            
+
+        </div>
+
+        <div class="navbar-nav ml-auto">
+            <a *ngIf="!currentUser || currentUser.role == Role.Customer"
+                    class="nav-item nav-link " routerLink="/cart">
+                <i class="fas fa-shopping-cart"></i>
+                MyCart
+            </a>
+
+            <ng-container *ngIf="currentUser; else noUser">
+                <a class="nav-item nav-link " routerLink="/order">
+                    <i class="fas fa-list-ul"></i>
+                    Orders
+                </a>
+                <a class="nav-item nav-link " routerLink="/profile">
+                    Signed as: {{name}}
+                </a>
+                <a class="nav-item nav-link " (click)="logout()" routerLink="/login" [queryParams]="{logout: true}">
+                    Sign Out
+                </a>
+            </ng-container>
+            <ng-template #noUser>
+                <a class="nav-item nav-link " routerLink="/login">
+                    Sign In
+                </a>
+                <a class="nav-item nav-link " routerLink="/register">
+                    Sign Up
+                </a>
+            </ng-template>
+        </div>
+    </div>
+</nav>
